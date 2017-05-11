@@ -20,5 +20,15 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+
+        //chef side
+        'religion' => $faker->name,
+        'address' => $faker->streetAddress,
+        'phone' => $faker->phoneNumber,
+        'preorderStatus' => 0,
+        'status' => 0,
+        //'image' => $faker->imageUrl($width = 640, $height = 480),
+        //'fname' => $faker->firstName,
     ];
 });
+

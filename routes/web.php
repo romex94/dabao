@@ -15,3 +15,5 @@ Route::get('/', function () {
 	$name = 'I am groot';
     return view('welcome', ['name' => $name]);
 });
+
+Route::post('/user','UserController@store');

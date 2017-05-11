@@ -20,6 +20,12 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('religion');
+            $table->string('address');
+            $table->string('phone');
+            $table->integer('preorderStatus');
+            $table->integer('status');
+           
         });
     }
 
