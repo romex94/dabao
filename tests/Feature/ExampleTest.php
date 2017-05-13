@@ -25,6 +25,23 @@ class ExampleTest extends TestCase
     }
 
     /** @test */
+    public function  a_user_can_create_info()
+    {
+        $user = factory('App\User')->create();
+        $this->be($user);
+        //$order = factory('App\Order')->make(["user_id" => $user->id]);
+        
+        $user = auth()->user();
+        //dd($user);
+        $response = $this->post( '/user', $user->toArray());
+
+        $this->assertDatabaseHas("users", ["name"=>$user->name, "email"=>$user->email, "religion"=>$user->religion, "address"=>$user->address]);
+        // Fill in and post to /orders
+
+        // Redirect user to /orders page and user should see the created order
+    }
+
+    /** @test */
     public function  a_user_can_add_info()
     {
         // $user = factory('App\User')->create();
