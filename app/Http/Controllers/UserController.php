@@ -37,6 +37,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        // Get the current user
+        // Modify the modifiable attributes
+        // Save the edited user
+        // Return to the original page
         User::create([
             'name' =>$request->name,
             'password' =>$request->password,
@@ -49,7 +53,13 @@ class UserController extends Controller
             'image' => $request->image,
             ]);
 
-        return redirect('/user');
+        if (Auth::attempt(['email' => $user->email, 'password' => $user->password])) {
+            // Authentication passed...
+            return redirect()->intended('/user');
+            
+        }
+
+        
     }
 
     /**
@@ -69,9 +79,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
         //
+        $user = auth()->user;
+        
+        return view("welcome", ['user'=>$user] );
     }
 
     /**
@@ -81,9 +94,29 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $password = $request->password; 
+        // Get the current user
+        $user = auth()->user();
+        if (empty($password)) {
+            $password = $user->password;
+        }
+        // Modify the modifiable attributes
+        $user->name = $request->name;
+        $user->password = $password;
+        $user->email = $request->email;
+        $user->religion = $request->religion;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->preorderStatus = $request->preorderStatus;
+        $user->status = $request->status;
+
+        // Save the edited user
+        $user->save();
+        
+        return view('user');
     }
 
     /**

@@ -16,8 +16,14 @@ Route::get('/', function () {
     return view('welcome', ['name' => $name]);
 });
 
+
 Route::post('/user','UserController@store');
 Route::post('/complain','ComplainController@store');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/user','UserController@edit');
+Route::post('/user','UserController@update');
+
+Route::post('/order','OrderController@store');

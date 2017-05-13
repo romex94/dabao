@@ -4,8 +4,6 @@
     <title></title>
 </head>
 <body>
-    <h1>Hello Fucker, <?= $name;?></h1>
-    <h2><?= $name;?></h2>
-    <h5><?= $name;?></h5>
+    <h1>Hello <?= $name;?></h1>
 </body>
 </html>

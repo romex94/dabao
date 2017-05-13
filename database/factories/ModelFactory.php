@@ -32,6 +32,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+
 $factory->define(App\Complain::class, function (Faker\Generator $faker) {
     return [
         'description' => $faker->text,
@@ -41,3 +42,18 @@ $factory->define(App\Complain::class, function (Faker\Generator $faker) {
         }
     ];
 });
+
+$factory->define(App\Order::class, function (Faker\Generator $faker) {
+
+    return [
+        'food' => $faker->name,
+        'quantity' => $faker->randomDigit,
+        'date' => $faker->date,
+
+       //'password' => $password ?: $password = bcrypt('secret'),
+       // 'remember_token' => str_random(10),
+        
+    ];
+});
+
+
