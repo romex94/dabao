@@ -12,5 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	$name = 'I am groot';
+    return view('welcome', ['name' => $name]);
 });
+
+Route::post('/user','UserController@store');
+Route::post('/complain','ComplainController@store');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
