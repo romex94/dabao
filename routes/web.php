@@ -17,3 +17,7 @@ Route::get('/', function () {
 });
 
 Route::post('/user','UserController@store');
+Route::post('/complain','ComplainController@store');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
