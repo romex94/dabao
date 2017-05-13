@@ -32,6 +32,17 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+
+$factory->define(App\Complain::class, function (Faker\Generator $faker) {
+    return [
+        'description' => $faker->text,
+        'title' => $faker->name,
+        'user_id' => function() {
+            return factory('App\User')->create()->id;
+        }
+    ];
+});
+
 $factory->define(App\Order::class, function (Faker\Generator $faker) {
 
     return [
@@ -44,4 +55,5 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
         
     ];
 });
+
 
