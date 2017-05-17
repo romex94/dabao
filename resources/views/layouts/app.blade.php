@@ -19,6 +19,11 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+
+    <style>
+        .level { display: flex; align-items: center; }
+        .flex { flex:1; }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -60,6 +65,9 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a>Credit balance: {{ auth()->user()->creditBalance }}</a>
+                                    </li>
+                                    <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -83,5 +91,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('footerjs')
 </body>
 </html>

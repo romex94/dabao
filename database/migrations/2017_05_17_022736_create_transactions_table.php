@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrdersTable extends Migration
+class CreateTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('Transactions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('food');
-            $table->integer('quantity');
-            $table->rememberToken();
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('order_id')->nullable();
+            $table->string('type');
+            $table->float('amount');
             $table->timestamps();
-            $table->dateTime('date');           
         });
     }
 
@@ -30,11 +30,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        /* Ryan - Code Review
-         *
-         * Added drop orders table on rollback
-         *
-         */ 
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('Transactions');
     }
 }
