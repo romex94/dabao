@@ -56,4 +56,16 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Address::class, function (Faker\Generator $faker) {
+
+    return [
+        'addressline1' => $faker->name,
+        'addressline2' => $faker->name,
+        'town' => $faker->name,
+        'state' => $faker->name,
+        'country' => $faker->name,
+        'postcode' => $faker->randomDigit,       
+    ];
+});
+
 

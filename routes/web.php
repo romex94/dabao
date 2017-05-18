@@ -27,3 +27,4 @@ Route::get('/user','UserController@edit');
 Route::post('/user','UserController@update');
 
 Route::post('/order','OrderController@store');
+

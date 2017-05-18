@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
 use App\Order;
+use App\Address;
 
 class ExampleTest extends TestCase
 {
@@ -72,6 +73,22 @@ class ExampleTest extends TestCase
         $this->withExceptionHandling();
 
         $this->assertDatabaseHas("orders", ["food"=>$order->food, "quantity"=>$order->quantity, "date"=>$order->date]);
+        // Fill in and post to /orders
+
+        // Redirect user to /orders page and user should see the created order
+    }
+
+    /** @test */
+    public function  a_user_can_create_address()
+    {
+        $address = factory('App\Address')->create();
+        $this->be($address);
+        //$order = factory('App\Order')->make(["user_id" => $user->id]);
+        
+        $address = auth()->address();
+        //dd($user);
+        $response = $this->post( '/address', $address->toArray());
+
         // Fill in and post to /orders
 
         // Redirect user to /orders page and user should see the created order
