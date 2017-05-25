@@ -28,3 +28,5 @@ Route::post('/user','UserController@update');
 
 Route::post('/order','OrderController@store');
 
+Route::post('/address','AddressController@create');
+

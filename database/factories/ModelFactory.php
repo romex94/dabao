@@ -49,12 +49,17 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
         'food' => $faker->name,
         'quantity' => $faker->randomDigit,
         'date' => $faker->date,
+        'chefname' =>$faker->name,
+        'totalpaid' =>$faker->randomDigit,
+        'status' => $faker->randomDigit,
+        'drivername' =>$faker->name,
 
        //'password' => $password ?: $password = bcrypt('secret'),
        // 'remember_token' => str_random(10),
         
     ];
 });
+
 
 $factory->define(App\Address::class, function (Faker\Generator $faker) {
 

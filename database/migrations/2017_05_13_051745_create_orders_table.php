@@ -19,7 +19,11 @@ class CreateOrdersTable extends Migration
             $table->integer('quantity');
             $table->rememberToken();
             $table->timestamps();
-            $table->dateTime('date');           
+            $table->dateTime('date');     
+            $table->string('chefname');
+            $table->integer('totalpaid');
+            $table->string('status');
+            $table->integer('drivername');   
         });
     }
 

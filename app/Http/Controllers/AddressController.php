@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\address;
 use Illuminate\Http\Request;
+use App\Address;
 
-class OrderController extends Controller
+class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,6 +26,14 @@ class OrderController extends Controller
     public function create()
     {
         //
+        Address::create([
+            'addressline1' =>$request->addressline1,
+            'addressline2' =>$request->addressline2,
+            'town' => $request->town,
+            'state' => $request->state,
+            'country' => $request->country,
+            'postcode' => $request->postcode,
+            ]);
     }
 
     /**
@@ -35,26 +45,16 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //
-        Order::create([
-            'food' =>$request->food,
-            'quantity' =>$request->quantity,
-            'date' => $request->date,
-            'chefname' =>$request->chefname,
-            'totalpaid' =>$request->totalpaid,
-            'status' => $request->status,
-            'drivername' =>$request->drivername,
-            ]);
-
-        return redirect('/user');
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\address  $address
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(address $address)
     {
         //
     }
@@ -62,10 +62,10 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\address  $address
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(address $address)
     {
         //
     }
@@ -74,10 +74,10 @@ class OrderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\address  $address
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, address $address)
     {
         //
     }
@@ -85,10 +85,10 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\address  $address
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(address $address)
     {
         //
     }
