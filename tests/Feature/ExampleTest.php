@@ -72,7 +72,7 @@ class ExampleTest extends TestCase
         $response = $this->post( '/order', $order->toArray());
         $this->withExceptionHandling();
 
-        $this->assertDatabaseHas("orders", ["food"=>$order->food, "quantity"=>$order->quantity, "date"=>$order->date]);
+        $this->assertDatabaseHas("orders", ["food"=>$order->food, "quantity"=>$order->quantity, "date"=>$order->date, "chefname"=>$order->chefname, "totalpaid"=>$order->totalpaid, "status"=>$order->status, "drivername"=>$order->drivername]);
         // Fill in and post to /orders
 
         // Redirect user to /orders page and user should see the created order
@@ -89,8 +89,42 @@ class ExampleTest extends TestCase
         //dd($user);
         $response = $this->post( '/address', $address->toArray());
 
+        $this->assertDatabaseHas("addresses", ["addressline1"=>$address->addressline1, "addressline2"=>$address->addressline2, "town"=>$address->town, "state"=>$address->state, "country"=>$address->country, "postcode"=>$address->postcode]);
         // Fill in and post to /orders
 
         // Redirect user to /orders page and user should see the created order
     }
+
+    // /** @test */
+    // //test order history//
+    // public function  users_are_able_to_view_order_history()
+    // {
+    //     $user = $this->signIn();
+    //     $order = factory('App\Order')->create();
+
+    //     //$this->be($order);
+    //     //$order = factory('App\Order')->make(["user_id" => $user->id]);
+        
+    //     $response = $this->post( '/Order', $order->toArray());
+    //     $this->withExceptionHandling();
+
+    //     $this->assertDatabaseHas("orderhistorys", ["chefname"=>$order->chefname, "totalpaid"=>$order->totalpaid, "status"=>$order->status, "drivername"=>$order->drivername]);
+    // }
+
+    // /** @test */
+    // //test order history//
+    // public function  guests_are_unable_to_view_order_history()
+    // {
+    //     $user = $this->signIn();
+    //     $order = factory('App\Order')->create();
+
+    //     //$this->be($order);
+    //     //$order = factory('App\Order')->make(["user_id" => $user->id]);
+        
+    //     $response = $this->post( '/order', $order->toArray());
+    //     $this->withExceptionHandling();
+
+    //     $this->assertDatabaseHas("orders", ["food"=>$order->food, "quantity"=>$order->quantity, "date"=>$order->date]);
+    // }
 }
+
