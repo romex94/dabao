@@ -95,6 +95,24 @@ class ExampleTest extends TestCase
         // Redirect user to /orders page and user should see the created order
     }
 
+    //edit profile//
+    /** @test */
+    public function  users_are_able_to_edit_profile()
+    {
+        $user = factory('App\User\Edit')->show();
+        $this->be($user);
+        //$order = factory('App\Order')->make(["user_id" => $user->id]);
+        
+        $user = auth()->user();
+        //dd($user);
+        $response = $this->get( '/user/edit', $user->toArray());
+
+        $this->assertDatabaseHas("users", ["name"=>$user->name, "email"=>$user->email, "religion"=>$user->religion, "address"=>$user->address]);
+        // Fill in and post to /orders
+
+        // Redirect user to /orders page and user should see the created order
+    }
+
     // /** @test */
     // //test order history//
     // public function  users_are_able_to_view_order_history()
