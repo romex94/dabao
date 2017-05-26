@@ -67,6 +67,17 @@
                                 </button>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Register as Chef
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    Register as Driver
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
