@@ -36,7 +36,7 @@ class ExampleTest extends TestCase
         //dd($user);
         $response = $this->post( '/user', $user->toArray());
 
-        $this->assertDatabaseHas("users", ["name"=>$user->name, "email"=>$user->email, "religion"=>$user->religion, "address"=>$user->address]);
+        $this->assertDatabaseHas("users", ["name"=>$user->name, "email"=>$user->email, "religion"=>$user->religion,]);
         // Fill in and post to /orders
 
         // Redirect user to /orders page and user should see the created order
@@ -54,7 +54,7 @@ class ExampleTest extends TestCase
         //dd($user);
         $response = $this->post( '/user', $user->toArray());
 
-        $this->assertDatabaseHas("users", ["name"=>$user->name, "email"=>$user->email, "religion"=>$user->religion, "address"=>$user->address]);
+        $this->assertDatabaseHas("users", ["name"=>$user->name, "email"=>$user->email, "religion"=>$user->religion,]);
         // Fill in and post to /orders
 
         // Redirect user to /orders page and user should see the created order
@@ -107,7 +107,7 @@ class ExampleTest extends TestCase
         //dd($user);
         $response = $this->get( '/user/edit', $user->toArray());
 
-        $this->assertDatabaseHas("users", ["name"=>$user->name, "email"=>$user->email, "religion"=>$user->religion, "address"=>$user->address]);
+        $this->assertDatabaseHas("users", ["name"=>$user->name, "email"=>$user->email, "religion"=>$user->religion]);
         // Fill in and post to /orders
 
         // Redirect user to /orders page and user should see the created order

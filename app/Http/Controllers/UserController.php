@@ -46,11 +46,9 @@ class UserController extends Controller
             'password' =>$request->password,
             'email' =>$request->email,
             'religion' => $request->name,
-            'address' => $request->address,
             'phone' => $request->phone,
-            'preorderStatus' =>  $request->preorderStatus,
             'status' =>  $request->status,
-            'image' => $request->image,
+            'halal_food_only'=> $request->halal_food_only,
             ]);
 
         if (Auth::attempt(['email' => $user->email, 'password' => $user->password])) {
@@ -106,12 +104,10 @@ class UserController extends Controller
         // Modify the modifiable attributes
         $user->name = $request->name;
         $user->password = $password;
-        $user->email = $request->email;
         $user->religion = $request->religion;
-        $user->address = $request->address;
         $user->phone = $request->phone;
-        $user->preorderStatus = $request->preorderStatus;
         $user->status = $request->status;
+        $user->halal_food_only = $request->halal_food_only;
 
         // Save the edited user
         $user->save();

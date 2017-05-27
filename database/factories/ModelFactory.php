@@ -23,10 +23,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
         //chef side
         'religion' => $faker->name,
-        'address' => $faker->streetAddress,
         'phone' => $faker->phoneNumber,
-        'preorderStatus' => 0,
         'status' => 0,
+        'halal_food_only' => $faker->boolean,
         //'image' => $faker->imageUrl($width = 640, $height = 480),
         //'fname' => $faker->firstName,
     ];

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\address;
 use Illuminate\Http\Request;
-use App\Address;
 
 class AddressController extends Controller
 {
@@ -26,14 +25,8 @@ class AddressController extends Controller
     public function create()
     {
         //
-        Address::create([
-            'addressline1' =>$request->addressline1,
-            'addressline2' =>$request->addressline2,
-            'town' => $request->town,
-            'state' => $request->state,
-            'country' => $request->country,
-            'postcode' => $request->postcode,
-            ]);
+        return view('Address.add-address-form');
+        
     }
 
     /**
@@ -45,7 +38,21 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         //
-        
+        $this->validate( $request, [
+                'address_line_1' => 'required',
+                'town' => 'required',
+                'state' => 'required',
+                'postcode' => 'required',
+                ]);
+
+        auth()->user()->addresses()->create([
+            'address_line_1' =>$request->address_line_1,
+            'address_line_2' =>$request->address_line_2,
+            'town' => $request->town,
+            'state' => $request->state,
+            'country' => 'Malaysia',
+            'postcode' => $request->postcode,
+            ]);
     }
 
     /**
@@ -68,6 +75,9 @@ class AddressController extends Controller
     public function edit(address $address)
     {
         //
+         $address = auth()->user()->addresses()->first();
+        
+        return view('Address.address-form', ['address' => $address]);
     }
 
     /**
@@ -80,6 +90,32 @@ class AddressController extends Controller
     public function update(Request $request, address $address)
     {
         //
+        $this->validate( $request, [
+                'address_line_1' => 'required',
+                'town' => 'required',
+                'state' => 'required',
+                'postcode' => 'required',
+                ]);
+        
+        // $password = $request->password; 
+        // // Get the current user
+        // $user = auth()->user();
+        // if (empty($password)) {
+        //     $password = $user->password;
+        // }
+        // Modify the modifiable attributes
+
+        $address = auth()->user()->addresses()->first();
+        $address->address_line_1 = $request->address_line_1;
+        $address->address_line_2= $request->address_line_2;
+        $address->town = $request->town;
+        $address->state = $request->state;
+        $address->postcode = $request->postcode;
+
+        // Save the edited user
+        $address->save();
+        
+        return view('address');
     }
 
     /**
