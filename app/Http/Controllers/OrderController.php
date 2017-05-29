@@ -7,6 +7,11 @@ use App\Order;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,16 +42,12 @@ class OrderController extends Controller
     {
         //
         Order::create([
-            'food' =>$request->food,
-            'quantity' =>$request->quantity,
-            'date' => $request->date,
-            'chefname' =>$request->chefname,
-            'totalpaid' =>$request->totalpaid,
-            'status' => $request->status,
-            'drivername' =>$request->drivername,
+            'delivery_time' => $request->delivery_time,
+            'chef_id' => $request->chef_id,
+            'total' => $request->total,
+            'driver_id' => $request->driver_id,
+            'user_id' => $request->user_id
             ]);
-
-        return redirect('/user');
     }
 
     /**

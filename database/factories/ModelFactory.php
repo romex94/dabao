@@ -45,11 +45,13 @@ $factory->define(App\Complain::class, function (Faker\Generator $faker) {
 $factory->define(App\Order::class, function (Faker\Generator $faker) {
 
     return [
-        'deliver_date' => $faker->date,
+        'delivery_time' => $faker->dateTime,
         'chef_id' =>$faker->randomDigit,
         'total' =>$faker->randomDigit,
         'driver_id' =>$faker->randomDigit,
-
+        'user_id' => function() {
+            return auth()->id() ?: factory('App\User')->create()->id;
+        }
        //'password' => $password ?: $password = bcrypt('secret'),
        // 'remember_token' => str_random(10),
         

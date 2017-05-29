@@ -17,11 +17,12 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->rememberToken();
             $table->timestamps();
-            $table->dateTime('delivery_date');     
-            $table->string('chef_name')->nullable();
+            $table->dateTime('delivery_time');     
+            $table->unsignedInteger('chef_id')->nullable();
             $table->float('total')->nullable();
             $table->string('status')->default("search_driver");
-            $table->string('driver_name')->nullable();   
+            $table->unsignedInteger('driver_id')->nullable();   
+            $table->unsignedInteger('user_id'); 
         });
     }
 
@@ -32,11 +33,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-<<<<<<< HEAD
-        //
-        Schema::dropIfExist('orders');
-=======
         Schema::dropIfExists('orders');
->>>>>>> refs/remotes/origin/develope
     }
 }
