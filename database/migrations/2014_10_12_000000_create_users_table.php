@@ -22,8 +22,8 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->string('religion')->nullable();
             $table->string('phone')->nullable();
-            $table->string('status')->default("inactive");
-           
+            $table->string('status')->default('inactive');
+            $table->boolean('halal_food_only')->default(false);
         });
     }
 
