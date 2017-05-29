@@ -58,6 +58,19 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Transaction::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => function() {
+            return factory('App\User')->create()->id;
+        },
+        'order_id' => function() {
+            return factory('App\Order')->create()->id;
+        },
+        'amount' => $faker->randomFloat(2, 30, 200),
+        'type' => $faker->randomElement(['in', 'out', 'refund'])
+    ];
+});
+
 
 $factory->define(App\Address::class, function (Faker\Generator $faker) {
 

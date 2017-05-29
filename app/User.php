@@ -25,8 +25,20 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function complains(){
+    public function complains()
+    {
         return $this->hasMany('App\Complain');
+    }
+
+
+    public function transactions()
+    {
+        return $this->hasMany('App\Transaction')->latest();
+    }
+
+    public function getCreditBalanceAttribute()
+    {
+        return $this->transactions()->where('type', 'in')->orWhere('type', 'refund')->sum('amount');
     }
 
     public function orders()
