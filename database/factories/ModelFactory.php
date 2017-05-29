@@ -23,10 +23,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
         //chef side
         'religion' => $faker->name,
-        'address' => $faker->streetAddress,
         'phone' => $faker->phoneNumber,
-        'preorderStatus' => 0,
         'status' => 0,
+        'halal_food_only' => $faker->boolean,
         //'image' => $faker->imageUrl($width = 640, $height = 480),
         //'fname' => $faker->firstName,
     ];
@@ -46,10 +45,13 @@ $factory->define(App\Complain::class, function (Faker\Generator $faker) {
 $factory->define(App\Order::class, function (Faker\Generator $faker) {
 
     return [
-        'food' => $faker->name,
-        'quantity' => $faker->randomDigit,
-        'date' => $faker->date,
-
+        'delivery_time' => $faker->dateTime,
+        'chef_id' =>$faker->randomDigit,
+        'total' =>$faker->randomDigit,
+        'driver_id' =>$faker->randomDigit,
+        'user_id' => function() {
+            return auth()->id() ?: factory('App\User')->create()->id;
+        }
        //'password' => $password ?: $password = bcrypt('secret'),
        // 'remember_token' => str_random(10),
         
@@ -66,6 +68,19 @@ $factory->define(App\Transaction::class, function (Faker\Generator $faker) {
         },
         'amount' => $faker->randomFloat(2, 30, 200),
         'type' => $faker->randomElement(['in', 'out', 'refund'])
+    ];
+});
+
+
+$factory->define(App\Address::class, function (Faker\Generator $faker) {
+
+    return [
+        'address_line_1' => $faker->name,
+        'address_line_2' => $faker->name,
+        'town' => $faker->name,
+        'state' => $faker->name,
+        'country' => $faker->name,
+        'postcode' => $faker->randomDigit,       
     ];
 });
 

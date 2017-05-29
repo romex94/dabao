@@ -15,11 +15,14 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('food');
-            $table->integer('quantity');
             $table->rememberToken();
             $table->timestamps();
-            $table->dateTime('date');           
+            $table->dateTime('delivery_time');     
+            $table->unsignedInteger('chef_id')->nullable();
+            $table->float('total')->nullable();
+            $table->string('status')->default("search_driver");
+            $table->unsignedInteger('driver_id')->nullable();   
+            $table->unsignedInteger('user_id'); 
         });
     }
 
@@ -30,11 +33,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        /* Ryan - Code Review
-         *
-         * Added drop orders table on rollback
-         *
-         */ 
         Schema::dropIfExists('orders');
     }
 }

@@ -20,12 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->string('religion');
-            $table->string('address');
-            $table->string('phone');
-            $table->integer('preorderStatus');
-            $table->integer('status');
-           
+            $table->string('religion')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('status')->default('inactive');
+            $table->boolean('halal_food_only')->default(false);
         });
     }
 

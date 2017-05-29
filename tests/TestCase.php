@@ -31,6 +31,8 @@ abstract class TestCase extends BaseTestCase
         $this->oldExceptionHandler = $this->app->make(ExceptionHandler::class);
 
         $this->app->instance(ExceptionHandler::class, new TestHandler);
+
+        return $this;
     }
 
     protected function withExceptionHandling()

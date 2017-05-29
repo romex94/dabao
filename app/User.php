@@ -14,9 +14,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -32,6 +30,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Complain');
     }
 
+
     public function transactions()
     {
         return $this->hasMany('App\Transaction')->latest();
@@ -40,6 +39,16 @@ class User extends Authenticatable
     public function getCreditBalanceAttribute()
     {
         return $this->transactions()->where('type', 'in')->orWhere('type', 'refund')->sum('amount');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany('App\Address');
     }
 }
 

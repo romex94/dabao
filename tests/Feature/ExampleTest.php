@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
 use App\Order;
+use App\Address;
 
 class ExampleTest extends TestCase
 {
@@ -25,7 +26,7 @@ class ExampleTest extends TestCase
     }
 
     /** @test */
-    public function  a_user_can_create_info()
+    public function a_user_can_create_info()
     {
         $user = factory('App\User')->create();
         $this->be($user);
@@ -35,14 +36,14 @@ class ExampleTest extends TestCase
         //dd($user);
         $response = $this->post( '/user', $user->toArray());
 
-        $this->assertDatabaseHas("users", ["name"=>$user->name, "email"=>$user->email, "religion"=>$user->religion, "address"=>$user->address]);
+        $this->assertDatabaseHas("users", ["name"=>$user->name, "email"=>$user->email, "religion"=>$user->religion,]);
         // Fill in and post to /orders
 
         // Redirect user to /orders page and user should see the created order
     }
 
     /** @test */
-    public function  a_user_can_add_info()
+    public function a_user_can_add_info()
     {
         // $user = factory('App\User')->create();
         $this->signIn();
@@ -53,27 +54,10 @@ class ExampleTest extends TestCase
         //dd($user);
         $response = $this->post( '/user', $user->toArray());
 
-        $this->assertDatabaseHas("users", ["name"=>$user->name, "email"=>$user->email, "religion"=>$user->religion, "address"=>$user->address]);
-        // Fill in and post to /orders
-
-        // Redirect user to /orders page and user should see the created order
-    }
-
-    /** @test */
-    public function  a_user_can_add_order()
-    {
-        $user = $this->signIn();
-        $order = factory('App\Order')->create();
-
-        //$this->be($order);
-        //$order = factory('App\Order')->make(["user_id" => $user->id]);
-        
-        $response = $this->post( '/order', $order->toArray());
-        $this->withExceptionHandling();
-
-        $this->assertDatabaseHas("orders", ["food"=>$order->food, "quantity"=>$order->quantity, "date"=>$order->date]);
+        $this->assertDatabaseHas("users", ["name"=>$user->name, "email"=>$user->email, "religion"=>$user->religion,]);
         // Fill in and post to /orders
 
         // Redirect user to /orders page and user should see the created order
     }
 }
+
