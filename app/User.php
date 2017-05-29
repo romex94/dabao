@@ -27,10 +27,15 @@ class User extends Authenticatable
 
     public function complains(){
         return $this->hasMany('App\Complain');
-
     }
 
-    public function addresses(){
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+
+    public function addresses()
+    {
         return $this->hasMany('App\Address');
     }
 }
