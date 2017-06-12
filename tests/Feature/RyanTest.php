@@ -2,10 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Tests\TestCase;
 
 class RyanTest extends TestCase
 {
@@ -95,5 +96,17 @@ class RyanTest extends TestCase
     	$this->post('/order', $order->toArray());
 
     	$this->assertEquals(1, auth()->user()->orders->count());
-    } 
+    }
+
+    /** @test */
+    public function an_authenticated_user_can_add_items_to_cart()
+    {
+        $this->signIn();
+
+        $item = factory('App\Item')->make();
+
+        $this->post('/cart/add', $item->toArray());
+
+        $this->assertEquals(1, Cart::count());
+    }  
 }

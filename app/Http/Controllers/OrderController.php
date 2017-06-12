@@ -30,6 +30,7 @@ class OrderController extends Controller
     public function create()
     {
         //
+        return view('users.order');
     }
 
     /**
@@ -41,12 +42,15 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //
+        
+        $user = $request->user_id ?: auth()->id();
+
         Order::create([
             'delivery_time' => $request->delivery_time,
-            'chef_id' => $request->chef_id,
+            'delivery_location' => $request->delivery_location,
             'total' => $request->total,
             'driver_id' => $request->driver_id,
-            'user_id' => $request->user_id
+            'user_id' => $user
             ]);
     }
 
