@@ -16,6 +16,16 @@ window.Vue = require('vue');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('order-form', require("./components/Order.vue"));
+const VueGoogleMaps = require('vue2-google-maps');
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyAYuOwRKxnJeUnA8HaDZSftXhUfV185QSY',
+    v: '3.27',
+    libraries: 'places'
+  }
+});
 
 const app = new Vue({
     el: '#app'

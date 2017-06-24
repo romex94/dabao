@@ -15,10 +15,9 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->rememberToken();
             $table->timestamps();
             $table->dateTime('delivery_time');     
-            $table->unsignedInteger('chef_id')->nullable();
+            $table->string('delivery_location');
             $table->float('total')->nullable();
             $table->string('status')->default("search_driver");
             $table->unsignedInteger('driver_id')->nullable();   

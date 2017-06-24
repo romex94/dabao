@@ -26,7 +26,11 @@ Route::post('/user','UserController@store');
 Route::get('/user','UserController@edit');
 Route::post('/user','UserController@update');
 
+Route::get('/order', 'OrderController@create');
 Route::post('/order','OrderController@store');
+
+Route::post('/cart/add', 'ItemController@add');
+
 Route::get('/topup', 'TransactionController@index');
 Route::post('/topup', 'TransactionController@store');
 
@@ -46,5 +50,4 @@ Route::get('/addressform', function () {
 Route::get('/add-addressform', function () {
     return view('Address.add-address-form');
 });
->>>>>>> refs/remotes/origin/develope
 
