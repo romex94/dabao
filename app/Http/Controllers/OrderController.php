@@ -53,7 +53,7 @@ class OrderController extends Controller
                     'latitude' => $request->latitude,
                 ]);
 
-        return $order;
+        return response($order->toArray(), 202);
     }
 
     /**

@@ -4,7 +4,8 @@
 
 <script>
 	import moment from 'moment';
-
+	import swal from 'sweetalert2';
+	var globaldata;
 	export default {
 		data() {
 			return {
@@ -57,7 +58,7 @@
 		          	this.marker_position.lng = position.coords.longitude;
 		        }.bind(this));
 		        this.is_loading = false;
-		    }	
+		    }
 		},
 
 		methods: {
@@ -76,7 +77,8 @@
 					})
 					.then(({data}) => {
 						// After creating order, post to find a driver
-						
+						globaldata = data;
+						console.log("The data is: " + data);
 						this.order_id = data.id;
 						axios.post('http://driver.welory.com.my/api/find/driver', {
 							latitude: this.marker_position.lat,
@@ -86,8 +88,30 @@
 							order_id : data.id
 						})
 						.then(({data}) => {
-							console.log(data);
+							
 							this.status = "Finding driver";
+							// Listen to Pusher event
+							Echo.channel('order-id-' + this.order_id)
+							    .listen('DriverResultReturned', (e) => {
+							    	var alerttext = "Driver not found, please try again";
+							    	if(e.status == "found")
+							    	{
+							    		alerttext = e.driver_name + " will be delivering your food.";
+							    	}
+							        swal({
+									  	title: 'Driver status: ' + e.status,
+									  	text: alerttext,
+									  	type: 'info',
+									});
+							    });	
+							// Test posting to the API
+							/*axios.post('/api/driver/result', {
+								driver_name: "Cibai Haw",
+								driver_id: "1",
+								driver_image: "some-url",
+								status: "found",
+								order_id: this.order_id
+							});*/
 						});
 					 
 					});
