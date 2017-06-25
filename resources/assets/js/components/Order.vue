@@ -8,7 +8,7 @@
 	export default {
 		data() {
 			return {
-				delivery_time: moment().format("MM-DD-YYYY hh:mm"),
+				delivery_time: moment().add(1, 'hours').format("YYYY-MM-DD hh:mm"),
 				total: 0,
 				driver_id: 0,
 				delivery_location: "Current location",
@@ -31,13 +31,18 @@
 		        postcode: "",
 		        state: "",
 		        city: "",
-		        unit: ""
+		        unit: "",
+		        order_id: 0,
+		        status: "Loading"
 			}
 		},
 
 		computed: {
 			infoContent() {
 				return "<b>" + this.location_type +"</b>" + "<br>" + this.delivery_location;			
+			},
+			fullAddress() {
+				return this.unit + ", " + this.route + ", " + this.city + ", " + this.postcode + ", " + this.state;
 			}
 		},
 
@@ -61,9 +66,31 @@
 				{
 					
 					this.is_loading = true;
-					// Post a request to Driver app to search driver
-					// On success, create an order
+					this.status = "Sending request";
+					// Create an empty order first
+					axios.post('/order', {
+						delivery_location: this.fullAddress,
+						delivery_time: this.delivery_time,
+						latitude: this.marker_position.lat,
+						longitude: this.marker_position.lng,	
+					})
+					.then(({data}) => {
+						// After creating order, post to find a driver
+						
+						this.order_id = data.id;
+						axios.post('http://driver.welory.com.my/api/find/driver', {
+							latitude: this.marker_position.lat,
+							longitude: this.marker_position.lng,
+							address: this.fullAddress,
+							time: this.delivery_time,
+							order_id : data.id
+						})
+						.then(({data}) => {
+							this.status = "Finding driver";
+						});
 					 
+					});
+					
 				}
 			},
 			updateCenter(newCenter) {

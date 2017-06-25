@@ -45,13 +45,15 @@ class OrderController extends Controller
         
         $user = $request->user_id ?: auth()->id();
 
-        Order::create([
-            'delivery_time' => $request->delivery_time,
-            'delivery_location' => $request->delivery_location,
-            'total' => $request->total,
-            'driver_id' => $request->driver_id,
-            'user_id' => $user
-            ]);
+        $order = Order::create([
+                    'delivery_time' => $request->delivery_time,
+                    'delivery_location' => $request->delivery_location,
+                    'user_id' => $user,
+                    'longitude' => $request->longitude,
+                    'latitude' => $request->latitude,
+                ]);
+
+        return $order;
     }
 
     /**
