@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use Log;
 
 class OrderController extends Controller
 {
@@ -44,7 +45,7 @@ class OrderController extends Controller
         //
         
         $user = $request->user_id ?: auth()->id();
-
+        Log::info($request);
         $order = Order::create([
                     'delivery_time' => $request->delivery_time,
                     'delivery_location' => $request->delivery_location,
