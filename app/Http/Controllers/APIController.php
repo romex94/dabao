@@ -12,7 +12,7 @@ class APIController extends Controller
     public function getDriverResult(Request $request)
     {
     	Log::info("Request received!");
-    	Log::info("For order: " . $request->order_id );
+    	Log::info("For order: " . $request );
     	event(new DriverResultReturned($request->order_id, 
     								   $request->status,
     								   $request->driver_id,
