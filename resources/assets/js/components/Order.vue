@@ -72,7 +72,7 @@
 						delivery_location: this.fullAddress,
 						delivery_time: this.delivery_time,
 						latitude: this.marker_position.lat,
-						longitude: this.marker_position.lng,	
+						longitude: this.marker_position.lng
 					})
 					.then(({data}) => {
 						// After creating order, post to find a driver
@@ -86,6 +86,7 @@
 							order_id : data.id
 						})
 						.then(({data}) => {
+							console.log(data);
 							this.status = "Finding driver";
 						});
 					 
