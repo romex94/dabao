@@ -18,6 +18,9 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
             $table->dateTime('delivery_time');     
             $table->string('delivery_location');
+            $table->unsignedInteger('delivery_id')->nullable();
+            $table->float('latitude');
+            $table->float('longitude');
             $table->float('total')->nullable();
             $table->string('status')->default("search_driver");
             $table->unsignedInteger('driver_id')->nullable();   

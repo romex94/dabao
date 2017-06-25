@@ -7,7 +7,7 @@
             <order-form inline-template>
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="loading" v-if="is_loading">Loading</div>
+                        <div class="loading" v-if="is_loading" v-text="status">Loading</div>
                         <div class="form-group">
                             <label for="delivery_time">Delivery by</label>
                             <input class="form-control" type="text" name="delivery_time" id="delivery_time" v-model="delivery_time">
