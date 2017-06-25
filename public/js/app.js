@@ -21001,6 +21001,11 @@ var globaldata;
 								text: alerttext,
 								type: 'info'
 							});
+							_this.Loading = false;
+							if (e.status == "found") {
+								// Redirect to select chef page
+								console.log("Redirecting to select chef");
+							}
 						});
 						// Test posting to the API
 						/*axios.post('/api/driver/result', {
