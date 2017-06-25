@@ -4,16 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Events\DriverResultReturned;
-use Psr\Http\Message\ServerRequestInterface;
 use Log;
 
 class APIController extends Controller
 {
     //
-    public function getDriverResult(ServerRequestInterface $request)
+    public function getDriverResult(Request $request)
     {
     	Log::info("Request received!");
-    	Log::info("For order: " . $request );
+    	Log::info("For order: " . $request->order_id );
     	event(new DriverResultReturned($request->order_id, 
     								   $request->status,
     								   $request->driver_id,
