@@ -103,10 +103,29 @@ class RyanTest extends TestCase
     {
         $this->signIn();
 
-        $item = factory('App\Item')->make();
+        $item = factory('App\Item')->make(['quantity' => 1]);
 
         $this->post('/cart/add', $item->toArray());
 
         $this->assertEquals(1, Cart::count());
+    } 
+
+    /** @test */
+    public function user_can_remove_cart_items()
+    {
+        $this->signIn();
+
+        Cart::destroy();
+
+        $item = factory('App\Item')->make(['quantity' => 1]);
+
+        $this->post('/cart/add', $item->toArray());
+
+        $this->assertEquals(1, Cart::count());
+
+        $this->post('/cart/remove', [Cart::content()->first()->rowId, 0]);
+
+        $this->assertEquals(0, Cart::count());
+
     }  
 }

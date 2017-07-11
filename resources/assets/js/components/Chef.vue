@@ -1,0 +1,39 @@
+<template>
+	<div :id="'chef-'+data.id" v-if="data.minPrice">
+		<div class="item-summary">
+			<div class="item-images">
+				<slider animation="fade" :auto="false" :indicators="false">
+					<slider-item>
+						<div class="slider-image" :style="'background-image:url(' + host + '/' + data.profileImage + ');'"></div>
+					</slider-item>
+					<slider-item v-for="(i, index) in data.medias" :key="index" v-if="i.type=='kitchen_image'">
+						<div class="slider-image" :style="'background-image:url('+ host + '/' + i.publicPath + ');'"></div>
+					</slider-item>
+				</slider>
+			</div>
+			<div class="item-contents">
+				<span class="name" v-text="data.user.name"></span><br>
+				<!-- <span class="ratings" v-text="data.rating"></span> <span class="glyphicon glyphicon-star"></span><br> -->
+				<span class="price" v-text="'Starting from RM'+data.minPrice.toFixed(2)"></span>
+			</div>
+			<div class="buttons flex-row">
+				<a :href="'/food/' + data.id" class="btn-teal flex">View details</a>
+			</div>
+		</div>
+		
+	</div>
+</template>
+
+<script>
+	import{ Slider, SliderItem } from 'vue-easy-slider';
+	export default {
+		props: ['data'],
+		components: {Slider, SliderItem},
+		data() {
+			return {
+				id: this.data.id,
+				host: "http://chef.welory.com.my"
+			};
+		}	
+	}
+</script>

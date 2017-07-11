@@ -51,7 +51,9 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
         'driver_id' =>$faker->randomDigit,
         'user_id' => function() {
             return auth()->id() ?: factory('App\User')->create()->id;
-        }
+        },
+        'latitude' => 3.0123456789,
+        'longitude' => 101.21354687
        //'password' => $password ?: $password = bcrypt('secret'),
        // 'remember_token' => str_random(10),
         
@@ -87,13 +89,15 @@ $factory->define(App\Address::class, function (Faker\Generator $faker) {
 $factory->define(App\Item::class, function (Faker\Generator $faker) {
     return [
        'name' => $faker->name,
-       'price' => $faker->randomFloat(2),
+       'price' => $faker->randomFloat(2, 7, 20),
        'description' => $faker->sentence, 
        'order_id' => function() {
             return factory('App\Order')->create()->id;
        },
        'type' => 'food',
-       'type_id' => '1'
+       'type_id' => $faker->randomDigit,
+       'quantity' => $faker->randomDigit,
+       'photo' => 'http://lorempixel.com/300/300/food'
     ];
 });
 

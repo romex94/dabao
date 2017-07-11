@@ -9,6 +9,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+Vue.prototype.authorize = function(handler) {
+	let user = window.App.user;
+
+	return user ? handler(user) : false;
+}
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -17,6 +22,9 @@ window.Vue = require('vue');
 
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('order-form', require("./components/Order.vue"));
+Vue.component('cart', require("./components/Cart.vue"));
+Vue.component('chefs', require("./components/Chefs.vue"));
+Vue.component('foods', require("./components/Foods.vue"));
 const VueGoogleMaps = require('vue2-google-maps');
 
 Vue.use(VueGoogleMaps, {

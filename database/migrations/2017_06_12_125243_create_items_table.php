@@ -20,6 +20,8 @@ class CreateItemsTable extends Migration
             $table->string('description')->nullable();
             $table->unsignedInteger('order_id');
             $table->string('type');
+            $table->string('photo');
+            $table->integer('quantity')->default(1);
             $table->unsignedInteger('type_id');
             $table->timestamps();
         });

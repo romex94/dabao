@@ -28,16 +28,23 @@ Route::post('/user','UserController@update');
 
 Route::get('/order', 'OrderController@create');
 Route::post('/order','OrderController@store');
+Route::get('/chefs', 'OrderController@chef');
+Route::get('/food/{chef}', 'OrderController@food');
 
+Route::get('/cart', 'ItemController@index');
 Route::post('/cart/add', 'ItemController@add');
+Route::post('/cart/remove', 'ItemController@remove');
 
 Route::get('/topup', 'TransactionController@index');
 Route::post('/topup', 'TransactionController@store');
 
+Route::get('/address/{address}', 'AddressController@show');
+Route::get('/addresses', 'AddressController@index');
 Route::post('/address','AddressController@store');
 Route::get('/address','AddressController@create');
 Route::get('/address/update', 'AddressController@edit');
 Route::post('/address/update','AddressController@update');
+
 
 Route::get('/userform', function () {
     return view('User.user-form');
