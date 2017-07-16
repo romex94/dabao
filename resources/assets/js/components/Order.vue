@@ -162,12 +162,13 @@
 					lng: newCenter.lng(),
 				}
 			},
-
-			updateMarkerCenter() {
-
-				marker_position = this.$refs.markdelivery.position;
+			updateMarkerCenter(data) {
+				//console.log(data);
+				this.marker_position = data.latLng;
+				//console.log(this.marker_position.lat);
 				this.location_type = "Custom location";
-				this.delivery_location = marker_position.lat + " " + marker_position.lng;
+				this.delivery_location = this.marker_position.lat + " " + this.marker_position.lng;
+				//console.log(this.delivery_location);
 				this.address = "";
 
 			},
