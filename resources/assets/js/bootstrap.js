@@ -47,3 +47,12 @@ window.Echo = new Echo({
     cluster: 'ap1',
 });
 
+window.events = new Vue();
+
+window.flash = function(message, level = 'success'){
+	window.events.$emit('flash', {message, level});
+};
+
+window.cart_refresh = function() {
+	window.events.$emit('cart_refresh');
+}

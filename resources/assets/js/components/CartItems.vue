@@ -46,7 +46,7 @@
 			},
 
 			reduce(index) {
-				this.$emit('reduce', index);
+				cart_refresh();
 			}	
 		},
 

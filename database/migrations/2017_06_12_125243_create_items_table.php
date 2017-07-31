@@ -23,6 +23,7 @@ class CreateItemsTable extends Migration
             $table->string('photo');
             $table->integer('quantity')->default(1);
             $table->unsignedInteger('type_id');
+            $table->string('row_id_in_cart')->nullable();
             $table->timestamps();
         });
     }

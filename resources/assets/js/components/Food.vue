@@ -15,8 +15,8 @@
 				
 			</div>
 			<div class="buttons flex-row">
-				<div class="btn-teal">View details</div>
-				<div class="btn-royal-blue">Add to cart</div>
+				<div class="btn-teal">view details</div>
+				<div class="btn-royal-blue" @click="purchase">add to cart</div>
 			</div>
 		</div>
 		
@@ -36,6 +36,12 @@
 
 		computed: {
 			
+		},
+
+		methods: {
+			purchase() {
+				this.$emit('purchase');
+			}
 		}	
 	}
 </script>

@@ -74,6 +74,11 @@
     flex: 1;
 }
 
+.flex-row-center {
+    justify-content: center;
+    align-items: center;
+}
+
 .cart-item .glyphicon{
     position: relative;
     color: red;
@@ -186,6 +191,40 @@
     background: #41b9e1;
 }
 
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+}
+
+/* Helper classes */
+
+.space-15px {
+    width:15px;
+    height:15px;
+}
+    
+/* Helper classes ends */
+/* Vue2 transitions */
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+  transition: all .5s ease;
+}
+.slide-fade-leave-active {
+  transition: all .5s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for <2.1.8 */ {
+  transform: translateY(-30px);
+  opacity: 0;
+}
+
+/* Vue2 transitions end */
 
 /* Animation keyframes */
 @-webkit-keyframes slideInFromRight {

@@ -9,7 +9,7 @@
 
 		data() {
 			return {
-				delivery_time: moment().add(1, 'hours').format("YYYY-MM-DD hh:mm"),
+				delivery_time: moment().add(1, 'hours').format("YYYY-MM-DD HH:mm"),
 				total: 0,
 				driver_id: 0,
 				delivery_location: "Current location",
@@ -164,7 +164,8 @@
 			},
 			updateMarkerCenter(data) {
 				//console.log(data);
-				this.marker_position = data.latLng;
+				this.marker_position.lat = data.latLng.lat();
+				this.marker_position.lng = data.latLng.lng();
 				//console.log(this.marker_position.lat);
 				this.location_type = "Custom location";
 				this.delivery_location = this.marker_position.lat + " " + this.marker_position.lng;

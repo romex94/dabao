@@ -6,8 +6,7 @@
 		</div>
 		<cart-items v-show="opened" 
 					@closed="cartItemClosed" 
-					:initial-cart-items="items" 
-					@reduce="reduce">
+					:initial-cart-items="items" >
 				
 		</cart-items>
 	</div>	
@@ -32,6 +31,10 @@
 
 		created() {
 			this.fetch();
+
+			window.events.$on('cart_refresh', data => {
+				this.fetch();
+			});
 		},
 
 		methods: {
@@ -52,19 +55,11 @@
 			refresh({data}){
 				this.items = [];
 				var item;
+
 				for(item in data){
 					this.items.push(data[item]);
 				};
 			},
-
-			reduce(index){
-				if(this.items[index].qty - 1 == 0) {
-					this.remove(index);
-				} else {
-					this.items[index].qty--;
-				}
-			}
-
 
 		},
 

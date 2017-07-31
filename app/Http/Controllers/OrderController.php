@@ -44,6 +44,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $address_id = $request->address_id;
+
         // Check if user used previous address or created a new one
         if( $request->address_id == 999 )
         {
@@ -76,8 +77,9 @@ class OrderController extends Controller
 
         $user = $request->user_id ?: auth()->id();
         //Log::info($request);
+        // TODO! Hard coded delivery time for testing purpose, should be dynamic
         $order = Order::create([
-                    'delivery_time' => $request->delivery_time,
+                    'delivery_time' => "2017-07-10 08:00", //$request->delivery_time, 
                     'delivery_location' => $request->delivery_location,
                     'user_id' => $user,
                     'longitude' => $request->longitude,

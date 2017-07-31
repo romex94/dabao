@@ -4,7 +4,7 @@
 			<img :src="data.options.photo" width="80px" height="80px"/>
 			<div class="flex">
 				<span class="name" v-text="name"></span><br>
-				<span class="quantity" v-text="'Quantity: ' + quantity"></span><br>
+				<span class="quantity" v-text="'Size: ' + description + ' Quantity: ' + data.qty"></span><br>
 				<span class="price" v-text="'RM' + subtotal"></span>
 			</div>
 			<span class="glyphicon glyphicon-minus" @click="requestReduce"></span>
@@ -20,7 +20,7 @@
 				key: this.data.rowId,
 				id: this.data.id,
 				name: this.data.name,
-				quantity: this.data.qty
+				description: this.data.options.description
 			};
 		},
 
@@ -29,19 +29,21 @@
 				// Post a request to remove cart item
 				axios.post("/cart/remove", {
 					'rowId': this.key,
-					'quantity': --this.quantity
+					'quantity': this.data.qty - 1
 				}).then(this.reduce);
 			},
 
 			reduce() {
 				this.$emit('reduced', this.sequence);
 			}
+			
 		},
 
 		computed: {
 			subtotal() {
-				return this.data.subtotal * this.quantity;
-			}
+				return this.data.subtotal;
+			},
+
 		}
 		
 	}
