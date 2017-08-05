@@ -15,6 +15,7 @@ class AddressController extends Controller
     public function index()
     {
         //
+        return auth()->user()->addresses;
     }
 
     /**
@@ -64,6 +65,7 @@ class AddressController extends Controller
     public function show(address $address)
     {
         //
+        return $address;
     }
 
     /**

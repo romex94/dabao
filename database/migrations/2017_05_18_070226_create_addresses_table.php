@@ -23,6 +23,8 @@ class CreateAddressesTable extends Migration
             $table->string('state');
             $table->string('country');
             $table->string('postcode');
+            $table->float('latitude', 20, 17);
+            $table->float('longitude', 20, 17);
             $table->timestamps();
         });
     }

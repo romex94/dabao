@@ -18,6 +18,8 @@
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
+            'signedIn' => Auth::check(),
+            'user' => auth()->user()
         ]) !!};
     </script>
 
@@ -86,6 +88,8 @@
                 </div>
             </div>
         </nav>
+
+        <cart></cart>
 
         @yield('content')
     </div>

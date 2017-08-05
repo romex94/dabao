@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Events\DriverResultReturned;
+use App\Order;
+use Illuminate\Http\Request;
 use Log;
 
 class APIController extends Controller
@@ -11,12 +12,18 @@ class APIController extends Controller
     //
     public function getDriverResult(Request $request)
     {
-    	Log::info("Request received!");
-    	Log::info("For order: " . $request->order_id );
-    	event(new DriverResultReturned($request->order_id, 
+    	Order::findOrFail($request->order_id)
+                ->update([
+                    'status' => 'selecting_chef',
+                    'driver_id' => $request->driver_id,
+                ]);
+        
+        event(new DriverResultReturned($request->order_id, 
     								   $request->status,
     								   $request->driver_id,
     								   $request->driver_name,
     								   $request->driver_image));
+
+
     }
 }

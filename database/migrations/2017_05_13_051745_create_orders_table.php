@@ -24,7 +24,8 @@ class CreateOrdersTable extends Migration
             $table->float('total')->nullable();
             $table->string('status')->default("search_driver");
             $table->unsignedInteger('driver_id')->nullable();   
-            $table->unsignedInteger('user_id'); 
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('address_id') ->nullable();
         });
     }
 

@@ -17,14 +17,23 @@
                             <gmap-autocomplete class="form-control"
                                 @place_changed="setPlace">
                             </gmap-autocomplete>
+                            or
+                            <div class="form-group">
+                                <address-selector :addresses="{{ auth()->user()->addresses->toJson() }}" @address_changed="updateAddress"></address-selector>
+                                
+
+                            </div>
                         </div>
                         <gmap-map :center="map_center" :zoom="zoom" style="height:300px" :scrollWheel="true" @center_changed="updateCenter" @position_changed="updateMarkerCenter($event)">
                             <gmap-info-window :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen" :content="infoContent" @closeclick="infoWinOpen=false"></gmap-info-window>
                             <gmap-marker :position="marker_position" ref="markdelivery" :draggable="true" :clickable="true" @click="toggleInfoWindow()" @dragend="updateMarkerCenter"></gmap-marker>
                             
                         </gmap-map>
-                        
+                        <div class="col-md-12 text-center">
+                            <i>You can adjust the map marker to point to a more accurate location</i>
+                        </div>
                         <h3>Delivery Address</h3>
+                        
                         <div class="form-group">
                             <label for="total">Unit/House number:</label>
                             <input type="text" class="form-control" id="total" name="total" v-model="unit" required>
