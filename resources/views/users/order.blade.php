@@ -18,7 +18,7 @@
                                 @place_changed="setPlace">
                             </gmap-autocomplete>
                         </div>
-                        <gmap-map :center="map_center" :zoom="zoom" style="height:300px" :scrollWheel="true" @center_changed="updateCenter">
+                        <gmap-map :center="map_center" :zoom="zoom" style="height:300px" :scrollWheel="true" @center_changed="updateCenter" @position_changed="updateMarkerCenter($event)">
                             <gmap-info-window :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen" :content="infoContent" @closeclick="infoWinOpen=false"></gmap-info-window>
                             <gmap-marker :position="marker_position" ref="markdelivery" :draggable="true" :clickable="true" @click="toggleInfoWindow()" @dragend="updateMarkerCenter"></gmap-marker>
                             
