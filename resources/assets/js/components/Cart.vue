@@ -9,6 +9,7 @@
 					:initial-cart-items="items" >
 				
 		</cart-items>
+		
 	</div>	
 </template>
 

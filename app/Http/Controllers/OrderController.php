@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Address;
 use App\Order;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+use Carbon\Carbon;
 use Log;
 
 class OrderController extends Controller
@@ -77,6 +79,7 @@ class OrderController extends Controller
 
         $user = $request->user_id ?: auth()->id();
         //Log::info($request);
+
         // TODO! Hard coded delivery time for testing purpose, should be dynamic
         $order = Order::create([
                     'delivery_time' => "2017-07-10 08:00", //$request->delivery_time, 
@@ -136,14 +139,60 @@ class OrderController extends Controller
         //
     }
 
-    public function food($chef_id)
+    public function food(Request $request, $chef_id)
     {
+        $current_order = auth()->user()->orders->last();
+        $current_order->update([
+                'chef_id' => $chef_id,
+                'chef_name' => $request->name,
+                'chef_address' => $request->address,
+                'chef_longitude' => $request->longitude,
+                'chef_latitude' => $request->latitude,
+                'status' => 'select_food'
+            ]);
+
         return view('users.food', ['id' => $chef_id]);
     }
 
     public function chef()
     {
         $current_order = auth()->user()->orders->last();
+
         return view('users.chef', ['order' => $current_order]);
+    }
+
+    public function checkout(Request $request)
+    {
+        $order = auth()->user()->orders->last();
+        return view('users.checkout', ["order" => $order]);
+    }
+
+    public function confirm(Request $request, Order $order)
+    {
+        $client = new Client();
+
+        $response = $client->request('POST', 'http://driver.welory.com.my/api/deliver', [
+                        'form_params' => [
+                            'order_id' => $order->id,
+                            'pickup_time' => Carbon::now(), // TODO! calculate time
+                            'pickup_address' => $order->chef_address,
+                            'longitude' => $order->chef_longitude,
+                            'latitude' => $order->chef_latitude
+                        ]
+                    ]);
+
+        $body = json_decode($response->getBody());
+        dd($body);
+
+        $client->request('POST', 'http://chef.welory.com.my/api/order/' . $order->chef_id, [
+                'form_params' => [
+                    'order_id' => $order->id,
+                    'pick_up_time' => Carbon::now(), // TODO! calculate time
+                    'driver' => $body->fname,
+                    'driver_car_plate' => $body->number_plate,
+                    'food' => $order->items,
+                    'total_paid' => $order->items()->sum('price')
+                ]
+            ]);
     }
 }

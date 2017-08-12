@@ -78,8 +78,19 @@
 				//console.log(food);
 				
 				this.purchasing_food = food;
-				this.is_purchasing = true;
+				
 
+				if(food.sizes.length == 0) 
+				{
+					// This food doesn't have any size
+					this.size = { 
+						price: this.purchasing_food.price,
+						size: "default"
+					};
+					this.confirm_purchase();
+
+				}
+				else this.is_purchasing = true;
 			},
 
 			confirm_purchase() {

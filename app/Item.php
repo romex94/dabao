@@ -14,6 +14,11 @@ class Item extends Model implements Buyable
     	return $this->belongsTo('App\Order');
     }
 
+    public function chef()
+    {
+        return $this->belongsTo('App\Chef');
+    }
+
     /**
      * Get the identifier of the Buyable item.
      *

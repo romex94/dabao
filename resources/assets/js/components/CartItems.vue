@@ -9,7 +9,7 @@
 					<li class="list-group-item cart-info">
 						<div class="flex-row">
 							<div class="flex">Subtotal: RM<span v-text="subtotal"></span></div>
-							<button class="btn btn-primary">Checkout</button>
+							<button class="btn btn-primary" @click="checkout">Checkout</button>
 						</div>
 					</li>
 				</ul>
@@ -47,6 +47,10 @@
 
 			reduce(index) {
 				cart_refresh();
+			},
+
+			checkout() {
+				window.location = '/checkout';
 			}	
 		},
 

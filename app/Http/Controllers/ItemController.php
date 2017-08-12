@@ -50,7 +50,7 @@ class ItemController extends Controller
                 'type' => $request->type,
                 'type_id' => $request->type_id,
                 'order_id' => $order_id,
-                'photo' => $request->photo
+                'photo' => $request->photo,
             ]);
 
             $cartitem = Cart::add($item->type . "-" . $item->type_id, $item->name, $quantity, $item->price, ['photo' => $item->photo, 'type' => $item->type, 'description' => $item->description]);
@@ -88,4 +88,6 @@ class ItemController extends Controller
         }
 
     }
+
+
 }

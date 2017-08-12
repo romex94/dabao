@@ -45,6 +45,9 @@ Route::get('/address','AddressController@create');
 Route::get('/address/update', 'AddressController@edit');
 Route::post('/address/update','AddressController@update');
 
+Route::get('/checkout', 'OrderController@checkout');
+Route::get('/confirm/{order}', 'OrderController@confirm');
+
 
 Route::get('/userform', function () {
     return view('User.user-form');

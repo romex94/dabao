@@ -10,13 +10,14 @@
 			</div>
 			<div class="item-contents">
 				<span class="name" v-text="data.name"></span><br>
-				<span class="glyphicon glyphicon-time"></span> <span class="preparation-time" v-text="data.cooking_time"></span> minutes <!-- <span class="ratings" v-text="data.rating"></span> --> <span class="glyphicon glyphicon-star"></span><br>
-				<!-- <span class="price" v-text="'RM'+data.price.toFixed(2)"></span> -->
+				<span class="glyphicon glyphicon-time"></span> <span class="preparation-time" v-text="data.cooking_time"></span> minutes <!-- <span class="ratings" v-text="data.rating"></span> <span class="glyphicon glyphicon-star"></span> --><br>
+				<span class="price" v-text="'RM'+data.price"></span>
 				
 			</div>
 			<div class="buttons flex-row">
 				<div class="btn-teal">view details</div>
-				<div class="btn-royal-blue" @click="purchase">add to cart</div>
+				<div class="btn-royal-blue" v-if="data.sizes.length > 0" @click="purchase">select sizes</div>
+				<div class="btn-royal-blue" v-else @click="purchase">add to cart</div>
 			</div>
 		</div>
 		

@@ -17,7 +17,11 @@
 				<span class="price" v-text="'Starting from RM'+data.minPrice.toFixed(2)"></span>
 			</div>
 			<div class="buttons flex-row">
-				<a :href="'/food/' + data.id" class="btn-teal flex">View details</a>
+				<a :href="'/food/' + data.id 
+						+ '?name=' + data.user.name 
+						+ '&address=' + data.address_line_1 + ' ,' + data.address_line_2 + ' ,' + data.town + ' ,' + data.state + ' ,' + data.postcode
+						+ '&longitude=' + data.longitude 
+						+ '&latitude=' + data.latitude" class="btn-teal flex">View details</a>
 			</div>
 		</div>
 		
