@@ -19,6 +19,11 @@ class Item extends Model implements Buyable
         return $this->belongsTo('App\Chef');
     }
 
+    public function getRouteKeyName()
+    {
+        return 'row_id_in_cart';
+    }
+
     /**
      * Get the identifier of the Buyable item.
      *

@@ -16,7 +16,7 @@ class Order extends Model
 
     public function foods()
     {
-    	return $this->hasMany('App\Food');
+    	return $this->hasMany('App\Item');
     }
 
     public function address()

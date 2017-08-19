@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Address;
+use App\Item;
 use App\Order;
-use Illuminate\Http\Request;
-use GuzzleHttp\Client;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 use Log;
 
 class OrderController extends Controller
@@ -82,7 +83,7 @@ class OrderController extends Controller
 
         // TODO! Hard coded delivery time for testing purpose, should be dynamic
         $order = Order::create([
-                    'delivery_time' => "2017-07-10 08:00", //$request->delivery_time, 
+                    'delivery_time' => "2017-08-26 08:00", //$request->delivery_time, 
                     'delivery_location' => $request->delivery_location,
                     'user_id' => $user,
                     'longitude' => $request->longitude,
@@ -169,12 +170,22 @@ class OrderController extends Controller
 
     public function confirm(Request $request, Order $order)
     {
+        //dd($request);
+
+        foreach($request->remarks as $key => $remarks)
+        {
+            $item = Item::where('row_id_in_cart', $key)->first();
+            $item->update([
+                'remarks' => $remarks
+                ]);
+        }
+
         $client = new Client();
 
         $response = $client->request('POST', 'http://driver.welory.com.my/api/deliver', [
                         'form_params' => [
                             'order_id' => $order->id,
-                            'pickup_time' => Carbon::now(), // TODO! calculate time
+                            'pickup_time' => Carbon::now()->toDateTimeString(), // TODO! calculate time
                             'pickup_address' => $order->chef_address,
                             'longitude' => $order->chef_longitude,
                             'latitude' => $order->chef_latitude
@@ -182,16 +193,15 @@ class OrderController extends Controller
                     ]);
 
         $body = json_decode($response->getBody());
-        dd($body);
 
         $client->request('POST', 'http://chef.welory.com.my/api/order/' . $order->chef_id, [
                 'form_params' => [
                     'order_id' => $order->id,
-                    'pick_up_time' => Carbon::now(), // TODO! calculate time
+                    'pick_up_time' => Carbon::now()->toDateTimeString(), // TODO! calculate time
                     'driver' => $body->fname,
-                    'driver_car_plate' => $body->number_plate,
-                    'food' => $order->items,
-                    'total_paid' => $order->items()->sum('price')
+                    'driver_car_plate' => 'WWW Car Plate',
+                    'food' => $order->foods->toArray(),
+                    'total_paid' => $order->foods()->sum('price')
                 ]
             ]);
     }

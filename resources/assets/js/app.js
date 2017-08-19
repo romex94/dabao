@@ -30,7 +30,6 @@ const VueGoogleMaps = require('vue2-google-maps');
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyAYuOwRKxnJeUnA8HaDZSftXhUfV185QSY',
-    v: '3.27',
     libraries: 'places'
   }
 });

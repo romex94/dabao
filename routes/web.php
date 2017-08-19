@@ -46,7 +46,7 @@ Route::get('/address/update', 'AddressController@edit');
 Route::post('/address/update','AddressController@update');
 
 Route::get('/checkout', 'OrderController@checkout');
-Route::get('/confirm/{order}', 'OrderController@confirm');
+Route::post('/confirm/{order}', 'OrderController@confirm');
 
 
 Route::get('/userform', function () {

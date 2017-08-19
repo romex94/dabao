@@ -2,6 +2,7 @@
 
 @section('content')
 <form method="POST" action="/confirm/{{ $order->id }}">
+	{{ csrf_field() }}
 	<div class="container">
 	    <div class="row">
 	    	<div class="col-md-12">
@@ -23,9 +24,9 @@
 	    				<thead>
 	    					<tr>
 	    						<td>Food</td>
+	    						<td>Notes</td>
 	    						<td>Qty</td>
 	    						<td>Price (RM)</td>
-	    						<td>Notes</td>
 	    					</tr>
 	    				</thead>
 	    				<tbody>
@@ -41,19 +42,20 @@
 		    							</div>
 		    						</td>
 		    						<td>
+		    							<textarea name="remarks[{{ $item->rowId }}]"></textarea>
+		    						</td>
+		    						<td>
 		    							{{ $item->qty }}
 		    						</td>
 		    						<td>
 		    							{{ $item->price }}
-		    						</td>
-		    						<td>
-		    							<textarea name="remarks[]"></textarea>
 		    						</td>
 	    						</tr>
 				    		@endforeach
 	    				</tbody>
 	    				<tfoot>
 	    					<tr>
+	    						<td></td>
 	    						<td></td>
 	    						<td>Total price:</td>
 	    						<td><b>{{Cart::content()->sum('price')}}</b></td>

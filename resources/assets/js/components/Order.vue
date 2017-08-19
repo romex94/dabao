@@ -89,6 +89,8 @@
 
 			findDriver(data) {
 				this.order_id = data.id;
+				this.status = "Finding driver";
+				
 				axios.post('http://driver.welory.com.my/api/find/driver', {
 					latitude: this.marker_position.lat,
 					longitude: this.marker_position.lng,
@@ -101,6 +103,7 @@
 					this.listen();	
 					
 				});
+				this.listen();
 			},
 			listen(){
 				// Listen to driver result Pusher event
@@ -112,8 +115,8 @@
 				    		alerttext = e.driver_name + " will be delivering your food.";
 				    	}
 				        swal({
-						  	title: 'Driver status: ' + e.status + 'Click the button below to start shopping! <br><small>You will be redirected in 5 seconds</small>',
-						  	text: alerttext,
+						  	title: '<i>Click the button below to start shopping!</i>',
+						  	html: alerttext + '<br><small>You will be redirected in 5 seconds</small>',
 						  	type: 'info',
 						  	timer: 5000,
 						  	confirmButtonText: "Select chef"
@@ -138,13 +141,13 @@
 						
 				    });
 				    // Test posting to the API
-					axios.post('/api/driver/result', {
+					/*axios.post('/api/driver/result', {
 						driver_name: "Cibai Haw",
 						driver_id: "1",
 						driver_image: "some-url",
 						status: "found",
 						order_id: this.order_id
-					});
+					});*/
 			},
 			execute() {
 				if( this.action == "Search driver" )
