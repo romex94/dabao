@@ -182,19 +182,20 @@ class OrderController extends Controller
 
         $client = new Client();
 
-        $response = $client->request('POST', 'http://driver.welory.com.my/api/deliver', [
+        $response = $client->request('POST', 'https://driver.welory.com.my/api/deliver', [
                         'form_params' => [
                             'order_id' => $order->id,
                             'pickup_time' => Carbon::now()->toDateTimeString(), // TODO! calculate time
                             'pickup_address' => $order->chef_address,
                             'longitude' => $order->chef_longitude,
-                            'latitude' => $order->chef_latitude
-                        ]
+                            'latitude' => $order->chef_latitude,
+                        ], 
+                        'verify' => false,
                     ]);
 
         $body = json_decode($response->getBody());
 
-        $client->request('POST', 'http://chef.welory.com.my/api/order/' . $order->chef_id, [
+        $client->request('POST', 'https://chef.welory.com.my/api/order/' . $order->chef_id, [
                 'form_params' => [
                     'order_id' => $order->id,
                     'pick_up_time' => Carbon::now()->toDateTimeString(), // TODO! calculate time
@@ -202,7 +203,8 @@ class OrderController extends Controller
                     'driver_car_plate' => 'WWW Car Plate',
                     'food' => $order->foods->toArray(),
                     'total_paid' => $order->foods()->sum('price')
-                ]
+                ],
+                'verify' => false,
             ]);
     }
 }

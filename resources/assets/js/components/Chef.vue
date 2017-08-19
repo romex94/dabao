@@ -1,5 +1,5 @@
 <template>
-	<div :id="'chef-'+data.id" v-if="data.minPrice">
+	<div :id="'chef-'+data.id">
 		<div class="item-summary">
 			<div class="item-images">
 				<slider animation="fade" :auto="false" :indicators="false">
@@ -14,7 +14,7 @@
 			<div class="item-contents">
 				<span class="name" v-text="data.user.name"></span><br>
 				<!-- <span class="ratings" v-text="data.rating"></span> <span class="glyphicon glyphicon-star"></span><br> -->
-				<span class="price" v-text="'Starting from RM'+data.minPrice.toFixed(2)"></span>
+				
 			</div>
 			<div class="buttons flex-row">
 				<a :href="'/food/' + data.id 

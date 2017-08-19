@@ -64109,7 +64109,7 @@ var globaldata;
 			this.order_id = data.id;
 			this.status = "Finding driver";
 
-			axios.post('http://driver.welory.com.my/api/find/driver', {
+			axios.post('https://driver.welory.com.my/api/find/driver', {
 				latitude: this.marker_position.lat,
 				longitude: this.marker_position.lng,
 				address: this.fullAddress,
@@ -66826,7 +66826,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			dataSet: false,
-			host: "http://chef.welory.com.my"
+			host: "https://chef.welory.com.my"
 		};
 	},
 	created: function created() {
@@ -66960,7 +66960,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.data.minPrice) ? _c('div', {
+  return _c('div', {
     attrs: {
       "id": 'chef-' + _vm.data.id
     }
@@ -66991,12 +66991,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.data.user.name)
     }
-  }), _c('br'), _vm._v(" "), _c('span', {
-    staticClass: "price",
-    domProps: {
-      "textContent": _vm._s('Starting from RM' + _vm.data.minPrice.toFixed(2))
-    }
-  })]), _vm._v(" "), _c('div', {
+  }), _c('br')]), _vm._v(" "), _c('div', {
     staticClass: "buttons flex-row"
   }, [_c('a', {
     staticClass: "btn-teal flex",
@@ -67007,7 +67002,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         '&longitude=' + _vm.data.longitude +
         '&latitude=' + _vm.data.latitude
     }
-  }, [_vm._v("View details")])])])]) : _vm._e()
+  }, [_vm._v("View details")])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -67139,7 +67134,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	components: { Food: __WEBPACK_IMPORTED_MODULE_0__Food_vue___default.a },
 	data: function data() {
 		return {
-			host: "http://chef.welory.com.my",
+			host: "https://chef.welory.com.my",
 			is_purchasing: false,
 			purchasing_food: false,
 			size: false

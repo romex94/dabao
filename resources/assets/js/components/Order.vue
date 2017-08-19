@@ -91,7 +91,7 @@
 				this.order_id = data.id;
 				this.status = "Finding driver";
 				
-				axios.post('http://driver.welory.com.my/api/find/driver', {
+				axios.post('https://driver.welory.com.my/api/find/driver', {
 					latitude: this.marker_position.lat,
 					longitude: this.marker_position.lng,
 					address: this.fullAddress,

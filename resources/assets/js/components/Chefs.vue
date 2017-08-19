@@ -16,7 +16,7 @@
 		data() {
 			return {
 				dataSet: false,
-				host: "http://chef.welory.com.my"
+				host: "https://chef.welory.com.my"
 			}
 		},
 

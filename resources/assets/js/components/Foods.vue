@@ -46,7 +46,7 @@
 		components: { Food },
 		data() {
 			return {
-				host: "http://chef.welory.com.my",
+				host: "https://chef.welory.com.my",
 				is_purchasing: false,
 				purchasing_food: false,
 				size: false
