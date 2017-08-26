@@ -63879,7 +63879,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\Web\\Cases\\Dabao\\dabao\\resources\\assets\\js\\components\\Example.vue"
+Component.options.__file = "D:\\Web\\Cases\\dabao\\dabao\\resources\\assets\\js\\components\\Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63977,7 +63977,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\Web\\Cases\\Dabao\\dabao\\resources\\assets\\js\\components\\Order.vue"
+Component.options.__file = "D:\\Web\\Cases\\dabao\\dabao\\resources\\assets\\js\\components\\Order.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -64108,7 +64108,7 @@ var globaldata;
 
 			this.order_id = data.id;
 			this.status = "Finding driver";
-
+			this.listen();
 			axios.post('https://driver.welory.com.my/api/find/driver', {
 				latitude: this.marker_position.lat,
 				longitude: this.marker_position.lng,
@@ -64119,39 +64119,40 @@ var globaldata;
 				var data = _ref2.data;
 
 				_this2.status = "Finding driver";
-				_this2.listen();
 			});
-			this.listen();
 		},
 		listen: function listen() {
 			var _this3 = this;
 
 			// Listen to driver result Pusher event
 			Echo.channel('order-id-' + this.order_id).listen('DriverResultReturned', function (e) {
-				var alerttext = "Driver not found, please try again";
+				var alerttext = "We are unable to find you a driver, please try again later";
 				if (e.status == "found") {
 					alerttext = e.driver_name + " will be delivering your food.";
-				}
-				__WEBPACK_IMPORTED_MODULE_1_sweetalert2___default.a({
-					title: '<i>Click the button below to start shopping!</i>',
-					html: alerttext + '<br><small>You will be redirected in 5 seconds</small>',
-					type: 'info',
-					timer: 5000,
-					confirmButtonText: "Select chef"
-					// TODO Add driver image
-				}).then(function () {
-					window.location = "/chefs";
-				}, function (dismiss) {
-					if (dismiss === 'timer') {
+					__WEBPACK_IMPORTED_MODULE_1_sweetalert2___default.a({
+						title: '<i>Click the button below to start shopping!</i>',
+						html: alerttext + '<br><small>You will be redirected in 5 seconds</small>',
+						type: 'info',
+						timer: 5000,
+						confirmButtonText: "Select chef"
+						// TODO Add driver image
+					}).then(function () {
 						window.location = "/chefs";
-					}
-				});
-				_this3.Loading = false;
-				if (e.status == "found") {
-					// Redirect to select chef page
-
-					console.log("Redirecting to select chef");
+					}, function (dismiss) {
+						if (dismiss === 'timer') {
+							window.location = "/chefs";
+						}
+					});
+				} else {
+					__WEBPACK_IMPORTED_MODULE_1_sweetalert2___default.a({
+						title: 'Sorry',
+						html: alerttext,
+						type: 'error',
+						confirmButtonText: "Close"
+						// TODO Add driver image
+					});
 				}
+				_this3.is_loading = false;
 			});
 			// Test posting to the API
 			/*axios.post('/api/driver/result', {
@@ -66157,7 +66158,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\Web\\Cases\\Dabao\\dabao\\resources\\assets\\js\\components\\AddressSelector.vue"
+Component.options.__file = "D:\\Web\\Cases\\dabao\\dabao\\resources\\assets\\js\\components\\AddressSelector.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] AddressSelector.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -66280,7 +66281,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\Web\\Cases\\Dabao\\dabao\\resources\\assets\\js\\components\\Cart.vue"
+Component.options.__file = "D:\\Web\\Cases\\dabao\\dabao\\resources\\assets\\js\\components\\Cart.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Cart.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -66410,7 +66411,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\Web\\Cases\\Dabao\\dabao\\resources\\assets\\js\\components\\CartItems.vue"
+Component.options.__file = "D:\\Web\\Cases\\dabao\\dabao\\resources\\assets\\js\\components\\CartItems.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CartItems.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -66526,7 +66527,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\Web\\Cases\\Dabao\\dabao\\resources\\assets\\js\\components\\CartItem.vue"
+Component.options.__file = "D:\\Web\\Cases\\dabao\\dabao\\resources\\assets\\js\\components\\CartItem.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CartItem.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -66776,7 +66777,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\Web\\Cases\\Dabao\\dabao\\resources\\assets\\js\\components\\Chefs.vue"
+Component.options.__file = "D:\\Web\\Cases\\dabao\\dabao\\resources\\assets\\js\\components\\Chefs.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Chefs.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -66881,7 +66882,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\Web\\Cases\\Dabao\\dabao\\resources\\assets\\js\\components\\Chef.vue"
+Component.options.__file = "D:\\Web\\Cases\\dabao\\dabao\\resources\\assets\\js\\components\\Chef.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Chef.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -67054,7 +67055,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\Web\\Cases\\Dabao\\dabao\\resources\\assets\\js\\components\\Foods.vue"
+Component.options.__file = "D:\\Web\\Cases\\dabao\\dabao\\resources\\assets\\js\\components\\Foods.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Foods.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -67214,7 +67215,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\Web\\Cases\\Dabao\\dabao\\resources\\assets\\js\\components\\Food.vue"
+Component.options.__file = "D:\\Web\\Cases\\dabao\\dabao\\resources\\assets\\js\\components\\Food.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Food.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -71865,7 +71866,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\Web\\Cases\\Dabao\\dabao\\node_modules\\vue2-google-maps\\dist\\components\\infoWindow.vue"
+Component.options.__file = "D:\\Web\\Cases\\dabao\\dabao\\node_modules\\vue2-google-maps\\dist\\components\\infoWindow.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] infoWindow.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -72053,7 +72054,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\Web\\Cases\\Dabao\\dabao\\node_modules\\vue2-google-maps\\dist\\components\\map.vue"
+Component.options.__file = "D:\\Web\\Cases\\dabao\\dabao\\node_modules\\vue2-google-maps\\dist\\components\\map.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] map.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -72388,7 +72389,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\Web\\Cases\\Dabao\\dabao\\node_modules\\vue2-google-maps\\dist\\components\\streetViewPanorama.vue"
+Component.options.__file = "D:\\Web\\Cases\\dabao\\dabao\\node_modules\\vue2-google-maps\\dist\\components\\streetViewPanorama.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] streetViewPanorama.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -72650,7 +72651,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\Web\\Cases\\Dabao\\dabao\\node_modules\\vue2-google-maps\\dist\\components\\placeInput.vue"
+Component.options.__file = "D:\\Web\\Cases\\dabao\\dabao\\node_modules\\vue2-google-maps\\dist\\components\\placeInput.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] placeInput.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -72828,7 +72829,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\Web\\Cases\\Dabao\\dabao\\node_modules\\vue2-google-maps\\dist\\components\\autocomplete.vue"
+Component.options.__file = "D:\\Web\\Cases\\dabao\\dabao\\node_modules\\vue2-google-maps\\dist\\components\\autocomplete.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] autocomplete.vue: functional components are not supported with templates, they should use render functions.")}
 

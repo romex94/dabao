@@ -90,7 +90,7 @@
 			findDriver(data) {
 				this.order_id = data.id;
 				this.status = "Finding driver";
-				
+				this.listen();
 				axios.post('https://driver.welory.com.my/api/find/driver', {
 					latitude: this.marker_position.lat,
 					longitude: this.marker_position.lng,
@@ -100,45 +100,47 @@
 				})
 				.then(({data}) => {
 					this.status = "Finding driver";
-					this.listen();	
-					
 				});
-				this.listen();
 			},
 			listen(){
 				// Listen to driver result Pusher event
 				Echo.channel('order-id-' + this.order_id)
 				    .listen('DriverResultReturned', (e) => {
-				    	var alerttext = "Driver not found, please try again";
+				    	var alerttext = "We are unable to find you a driver, please try again later";
 				    	if(e.status == "found")
 				    	{
 				    		alerttext = e.driver_name + " will be delivering your food.";
-				    	}
-				        swal({
-						  	title: '<i>Click the button below to start shopping!</i>',
-						  	html: alerttext + '<br><small>You will be redirected in 5 seconds</small>',
-						  	type: 'info',
-						  	timer: 5000,
-						  	confirmButtonText: "Select chef"
-						  	// TODO Add driver image
-						}).then(
-							function() {
-								window.location = "/chefs";
-							},
-							function (dismiss) {
-								if(dismiss === 'timer') {
+				    		swal({
+							  	title: '<i>Click the button below to start shopping!</i>',
+							  	html: alerttext + '<br><small>You will be redirected in 5 seconds</small>',
+							  	type: 'info',
+							  	timer: 5000,
+							  	confirmButtonText: "Select chef"
+							  	// TODO Add driver image
+							}).then(
+								function() {
 									window.location = "/chefs";
+								},
+								function (dismiss) {
+									if(dismiss === 'timer') {
+										window.location = "/chefs";
+									}
 								}
-							}
-						);
-						this.Loading = false;
-						if( e.status == "found" )
-						{
-							// Redirect to select chef page
-							
-							console.log("Redirecting to select chef");
-						}
-						
+								
+							);
+				    	}
+				    	else
+				    	{
+				    		swal({
+							  	title: 'Sorry',
+							  	html: alerttext,
+							  	type: 'error',
+							  	confirmButtonText: "Close"
+							  	// TODO Add driver image
+							});
+				    	}
+				    	this.is_loading = false;
+				        				
 				    });
 				    // Test posting to the API
 					/*axios.post('/api/driver/result', {

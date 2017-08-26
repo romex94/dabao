@@ -83,7 +83,7 @@ class OrderController extends Controller
 
         // TODO! Hard coded delivery time for testing purpose, should be dynamic
         $order = Order::create([
-                    'delivery_time' => "2017-08-26 08:00", //$request->delivery_time, 
+                    'delivery_time' => "2017-08-21 08:00", //$request->delivery_time, 
                     'delivery_location' => $request->delivery_location,
                     'user_id' => $user,
                     'longitude' => $request->longitude,
